@@ -19,25 +19,24 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // Pass extra properties from the user to the token.
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
-        // Use GitHub’s default image field; GitHub returns "avatar_url" by default.
-        token.image = user.image;
       }
       return token;
     },
-    // Make the token properties available on session.
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.image = token.image as string;
       }
       return session;
     },
   },
-  secret: process.env.AUTH_SECRET,
+  pages: {
+    signIn: '/auth/signin',
+    error: '/auth/error',
+  },
+  debug: process.env.NODE_ENV === 'development',
 };
 
 // For use in API route files.
