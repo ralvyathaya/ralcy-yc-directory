@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from '@/auth'; // or wherever you defined it
+import { LoginButton, LogoutButton } from './AuthButtons';
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
@@ -20,28 +21,22 @@ const Navbar = async () => {
               <Link href="/startup/create">
                 <span>Create</span>
               </Link>
-              <form action={async () => {
-                'use server';
-                // use a server action or API route for sign-out
-                // signOut is typically used on the client via next-auth/react
-              }}>
-                <button type="submit">
-                  <span>Logout</span>
-                </button>
-              </form>
-              <Link href={`/user/${session.user.id}`}>
+              <LogoutButton />
+              <div className="flex items-center gap-2">
+                {session.user.image && (
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name || 'User'}
+                    width={32}
+                    height={32}
+                    className="rounded-full"
+                  />
+                )}
                 <span>{session.user.name}</span>
-              </Link>
+              </div>
             </>
           ) : (
-            <form action={async () => {
-              'use server';
-              // similarly, signIn (with GitHub) is typically imported from next-auth/react on the client
-            }}>
-              <button type="submit">
-                <span>Login with GitHub</span>
-              </button>
-            </form>
+            <LoginButton />
           )}
         </div>
       </nav>
