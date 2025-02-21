@@ -1,10 +1,23 @@
 import SearchForm from "../../components/SearchForm";
+import StartupCard from "../../components/StartupCard";
 
 // Home component that handles search parameters
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ query?: string }>; // Corrected type for searchParams
-}) { 
-  const query  = (await searchParams).query; // Destructured query for clarity
+}) {
+  const query = (await searchParams).query;
+
+  const posts = [{
+    _createdAt: "Yesterday",
+    views: 55,
+    author: { _id: 1, name: "John Doe" },
+    _id: 1,
+    description: "A startup",
+    image: { url: "https://via.placeholder.com/150" },
+    category: "Robots",
+    title: "Robotics Startup"
+  }]
+
   return (
     <>
       <section className="pink_container">
@@ -15,6 +28,22 @@ export default async function Home({ searchParams }: {
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions.
         </p>
         <SearchForm query={query} /> {/* Removed unnecessary spaces */}
+      </section>
+
+      <section className="section_container">
+        <p className="text-30-semibold">
+          {query ? `Search results for "${query}"` : "All Startups"}
+        </p>
+
+        <ul className="mt-7 card_grid">
+          {posts?.length > 0 ? (
+            posts.map((post: StartupCardType, index: number) => (
+              <StartupCard key={post?._id} post={post} />
+            ))
+          ) : (
+            <p className="no-results">No results found</p>
+          )}
+        </ul>
       </section>
     </>
   );
