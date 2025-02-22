@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { Providers } from "./providers";
+import "./globals.css";
+import "easymde/dist/easymde.min.css";
 
 import localFont from "next/font/local"; // Import localFont to use local font files
 
