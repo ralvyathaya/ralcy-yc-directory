@@ -44,9 +44,4 @@ export const startup = defineType({
             type: 'markdown', // Field for the startup's description
         }),
     ],
-    preview: { // Preview configuration
-        select: {
-            title: 'title', // Selecting the startup's title for preview
-        },
-    }, 
 });
