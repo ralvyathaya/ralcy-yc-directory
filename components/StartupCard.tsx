@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity/types";
+import { urlFor } from "@/sanity/lib/image";
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
@@ -38,11 +39,11 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         <div className="flex-shrink-0">
           <Link href={`/user/${author?._id}`}>
             <Image
-              src="https://placehold.co/48x48" 
-              alt="Placeholder" 
-              width={48} 
-              height={48} 
-              className="rounded-full" 
+              src={author?.image ? urlFor(author.image).url() : "https://placehold.co/48x48"}
+              alt={author?.name || "Author"}
+              width={48}
+              height={48}
+              className="rounded-full"
             />
           </Link>
         </div>
@@ -54,16 +55,16 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </p>
 
         <Image
-          src={image || "https://placehold.co/600x400"} 
-          alt="placeholder" 
-          className="startup-card_img" 
-          width={600} 
-          height={400} 
+          src={image ? urlFor(image).url() : "https://placehold.co/600x400"}
+          alt={title || "Startup image"}
+          className="startup-card_img"
+          width={600}
+          height={400}
         />
       </Link>
 
       <div className="flex-between gap-3 mt-5">
-        <Link href={`query=${category?.toLowerCase}`}>
+        <Link href={`query=${category?.toLowerCase()}`}>
           <p className="text-16-medium">{category}</p>
         </Link>
         <Button className="startup-card_btn" asChild>

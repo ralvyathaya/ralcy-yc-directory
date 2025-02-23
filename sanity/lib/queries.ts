@@ -9,21 +9,21 @@ export const STARTUPS_QUERY = defineQuery(`
     author-> {
       _id,
       name,
-      image,
+      image {
+        asset-> {
+          _id,
+          url
+        }
+      },
       bio
     },
     views,
     description,
     category,
-    image{
-      asset->{
-        url,
-        metadata {
-          dimensions {
-            width,
-            height
-          }
-        }
+    image {
+      asset-> {
+        _id,
+        url
       }
     }
   }
@@ -36,7 +36,16 @@ export const STARTUP_BY_ID_QUERY =
   slug,
   _createdAt,
   author -> {
-    _id, name, username, image, bio
+    _id, 
+    name, 
+    username, 
+    image {
+      asset-> {
+        _id,
+        url
+      }
+    }, 
+    bio
   },
   views,
   description,
