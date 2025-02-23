@@ -37,7 +37,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </div>
         <div className="flex-shrink-0">
           <Link href={`/user/${author?._id}`}>
-            <Image 
+            <Image
               src="https://placehold.co/48x48" 
               alt="Placeholder" 
               width={48} 
@@ -53,7 +53,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
           {description}
         </p>
 
-        <Image 
+        <Image
           src={image || "https://placehold.co/600x400"} 
           alt="placeholder" 
           className="startup-card_img" 
