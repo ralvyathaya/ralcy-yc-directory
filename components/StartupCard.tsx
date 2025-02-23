@@ -12,6 +12,9 @@ export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   const { _createdAt, views, author, title, category, _id, image, description } = post;
 
+  // Debug: Log the image URL to check if it's being passed correctly
+  console.log('StartupCard - image:', image);
+
   return (
     <li className="startup-card group">
       <div className="flex-between">
@@ -55,7 +58,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </p>
 
         <Image
-          src={image ? urlFor(image).url() : "https://placehold.co/600x400"}
+          src={image || 'https://images.pexels.com/photos/30824250/pexels-photo-30824250/free-photo-of-playful-seals-on-rocky-san-diego-shore.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}
           alt={title || "Startup image"}
           className="startup-card_img"
           width={600}

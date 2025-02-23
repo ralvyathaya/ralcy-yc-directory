@@ -20,12 +20,7 @@ export const STARTUPS_QUERY = defineQuery(`
     views,
     description,
     category,
-    image {
-      asset-> {
-        _id,
-        url
-      }
-    }
+    image
   }
 `);
 
