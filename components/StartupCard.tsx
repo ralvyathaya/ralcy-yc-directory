@@ -58,7 +58,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         </p>
 
         <Image
-          src={image || 'https://images.pexels.com/photos/30824250/pexels-photo-30824250/free-photo-of-playful-seals-on-rocky-san-diego-shore.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'}
+          src={image || 'https://placehold.co/600x400'}
           alt={title || "Startup image"}
           className="startup-card_img"
           width={600}
