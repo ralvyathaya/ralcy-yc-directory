@@ -3,10 +3,12 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import { urlFor } from '@/sanity/lib/image';
 import { notFound } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
-import React from 'react';
+import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { marked } from 'marked'; // Replace markdown-it with marked
+import { Skeleton } from '@/components/ui/skeleton';
+import View from '@/components/View';
 
 export const experimental_ppr = true;
 
@@ -16,8 +18,8 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   if (!post) return notFound();
 
-  // Use marked to parse the markdown content
-  const parsedContent = marked(post?.pitch || "");
+  // Use marked to parse the markdown content and await the result
+  const parsedContent = await marked(post?.pitch || "");
 
   return (
     <>
@@ -55,11 +57,19 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
           <h3 className="text-30-bold">Pitch Details</h3>
           {parsedContent ? (
-            <article dangerouslySetInnerHTML={{ __html: parsedContent }} />
+            <article className="prose max-w-4xl font-work-sans break-all" dangerouslySetInnerHTML={{ __html: parsedContent }} />
           ) : (
             <p className='no-result'>No details provided</p>
           )}
         </div>
+
+        <hr className="divider" />
+
+        <Suspense fallback={<Skeleton className='view_skeleton'>
+
+        </Skeleton>}>
+          <View id={id}/>
+        </Suspense>
       </section>
     </>
   );
