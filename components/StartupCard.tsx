@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Author, Startup } from "@/sanity/types";
-import { urlFor } from "@/sanity/lib/image";
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
@@ -42,7 +41,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         <div className="flex-shrink-0">
           <Link href={`/user/${author?._id}`}>
             <Image
-              src={author?.image ? urlFor(author.image).url() : "https://placehold.co/48x48"}
+              src={author?.image || "https://placehold.co/48x48"}
               alt={author?.name || "Author"}
               width={48}
               height={48}
