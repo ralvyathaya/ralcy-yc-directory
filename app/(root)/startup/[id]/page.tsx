@@ -1,6 +1,5 @@
 import { client } from '@/sanity/lib/client';
 import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
-import { urlFor } from '@/sanity/lib/image';
 import { notFound } from 'next/navigation';
 import { formatDate } from '@/lib/utils';
 import React, { Suspense } from 'react';
@@ -42,7 +41,8 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <div className="flex-between gap-5">
             <Link href={`/user/${post.author._id}`} className='flex gap-2 items-center mb-3'>
               <Image
-                src={urlFor(post.author.image).url()}
+                // Replaced urlFor usage since author.image is now a URL string
+                src={post.author.image || "https://placehold.co/64x64"}
                 alt={`${post.author.name}'s avatar`}
                 width={64}
                 height={64}
@@ -65,9 +65,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         <hr className="divider" />
 
-        <Suspense fallback={<Skeleton className='view_skeleton'>
-
-        </Skeleton>}>
+        <Suspense fallback={<Skeleton className='view_skeleton'/>}>
           <View id={id}/>
         </Suspense>
       </section>
