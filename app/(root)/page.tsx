@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: {
   const params = { search: query || null };
 
   const session = await getServerSession(authOptions);
-  console.log(session?.user?.email); // Access Sanity user ID
+  console.log(session?.user?.id); // Access Sanity user ID
 
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
 
