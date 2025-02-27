@@ -4,6 +4,7 @@ import "./globals.css";
 import "easymde/dist/easymde.min.css";
 
 import localFont from "next/font/local"; // Import localFont to use local font files
+import { Toaster } from "sonner";
 
 // Create workSans with multiple font weights, styles, and sources
 const workSans = localFont({
@@ -34,7 +35,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={workSans.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Toaster/>
+          </Providers>
       </body>
     </html>
   );
