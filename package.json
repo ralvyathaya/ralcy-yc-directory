@@ -14,7 +14,9 @@
   "packageManager": "npm@10.9.2",
   "overrides": {
     "react": "$react",
-    "react-dom": "$react-dom"
+    "react-dom": "$react-dom",
+    "next": "$next"
+
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
