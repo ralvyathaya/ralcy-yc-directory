@@ -2,7 +2,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { getServerSession } from "next-auth/next"
-import { BadgePlus } from "lucide-react"
 import { authOptions } from "@/auth"
 import { LoginButton, LogoutButton } from "./AuthButtons"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
@@ -29,7 +28,7 @@ const Navbar = async () => {
               >
                 <Avatar className="w-8 h-8 md:w-10 md:h-10">
                   <AvatarImage
-                    src={session?.user?.image}
+                    src={session?.user?.image ?? ""}
                     alt={session?.user?.name || ""}
                   />
                 </Avatar>

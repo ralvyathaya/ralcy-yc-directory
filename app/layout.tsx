@@ -1,45 +1,50 @@
-import type { Metadata } from "next";
-import { Providers } from "./providers";
-import "./globals.css";
-import "easymde/dist/easymde.min.css";
+import type { Metadata } from "next"
+import { Providers } from "./providers"
+import "./globals.css"
+import "easymde/dist/easymde.min.css"
 
-import localFont from "next/font/local"; // Import localFont to use local font files
-import { Toaster } from "sonner";
+import localFont from "next/font/local" // Import localFont to use local font files
+import { Toaster } from "sonner"
 
 // Create workSans with multiple font weights, styles, and sources
-const workSans = localFont({
+const funnelSans = localFont({
   src: [
-    { path: "./fonts/WorkSans-Black.ttf", weight: "900", style: "normal" }, // Black weight
-    { path: "./fonts/WorkSans-ExtraBold.ttf", weight: "800", style: "normal" }, // Extra Bold weight
-    { path: "./fonts/WorkSans-Bold.ttf", weight: "700", style: "normal" }, // Bold weight
-    { path: "./fonts/WorkSans-SemiBold.ttf", weight: "600", style: "normal" }, // Semi-Bold weight
-    { path: "./fonts/WorkSans-Medium.ttf", weight: "500", style: "normal" }, // Medium weight
-    { path: "./fonts/WorkSans-Regular.ttf", weight: "400", style: "normal" }, // Regular weight
-    { path: "./fonts/WorkSans-Light.ttf", weight: "300", style: "normal" }, // Light weight
-    { path: "./fonts/WorkSans-ExtraLight.ttf", weight: "200", style: "normal" }, // Extra Light weight
-    { path: "./fonts/WorkSans-Thin.ttf", weight: "100", style: "normal" }, // Thin weight
+    {
+      path: "./fonts/FunnelSans-ExtraBold.ttf",
+      weight: "800",
+      style: "normal",
+    }, // Extra Bold weight
+    { path: "./fonts/FunnelSans-Bold.ttf", weight: "700", style: "normal" }, // Bold weight
+    { path: "./fonts/FunnelSans-SemiBold.ttf", weight: "600", style: "normal" }, // Semi-Bold weight
+    { path: "./fonts/FunnelSans-Medium.ttf", weight: "500", style: "normal" }, // Medium weight
+    { path: "./fonts/FunnelSans-Regular.ttf", weight: "400", style: "normal" }, // Regular weight
+    { path: "./fonts/FunnelSans-Light.ttf", weight: "300", style: "normal" }, // Light weight // Extra Light weight
   ],
   variable: "--font-work-sans", // CSS variable name
-});
+})
 
 export const metadata: Metadata = {
-  title: "Ralvy YC Directory", // Title of the application
+  title: "Ralvy Directory", // Title of the application
   description: "A directory for Ralvy YC members", // Brief description of the application
-};
+  icons: {
+    icon: "/favicon.svg", // Set the new favicon
+  },
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body className={workSans.className}>
+      <head></head>
+      <body className={funnelSans.className}>
         <Providers>
           {children}
-          <Toaster/>
-          </Providers>
+          <Toaster />
+        </Providers>
       </body>
     </html>
-  );
+  )
 }
