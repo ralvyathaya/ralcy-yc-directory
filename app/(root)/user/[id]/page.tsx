@@ -35,11 +35,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             height={220}
             className="profile_image"
           />
-          <p className="text-30-extrabold mt-7 text-center">
+          <p className="text-30-extrabold mt-7 text-center !text-black">
             @{user?.username}
           </p>
 
-          <p className="mt-1 text-center text-14-normal">
+          <p className="mt-1 text-center text-14-normal !text-gray-700">
             {user.bio || "No bio available"}
           </p>
         </div>
