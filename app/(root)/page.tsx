@@ -4,6 +4,7 @@ import SearchForm from "../../components/SearchForm"
 import StartupCard, { StartupTypeCard } from "../../components/StartupCard"
 import { STARTUPS_QUERY } from "@/sanity/lib/queries"
 import { sanityFetch, SanityLive } from "@/sanity/lib/live"
+import { FlickeringGrid } from "@/components/ui/flickering-grid"
 
 export default async function Home({
   searchParams,
@@ -20,15 +21,25 @@ export default async function Home({
 
   return (
     <>
-      <section className="pink_container">
-        <h1 className="heading">
-          Pitch Your Startup, <br /> Connect With Entrepreneurs
-        </h1>
-        <p className="sub-heading !max-w-3xl">
-          Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
-          Competitions.
-        </p>
-        <SearchForm query={query} />
+      <section className="hero_container relative">
+        <FlickeringGrid
+          className="z-0 absolute inset-0 size-full"
+          squareSize={4}
+          gridGap={18}
+          color="#6B7280"
+          maxOpacity={0.5}
+          flickerChance={0.1}
+        />
+        <div className="relative z-10 flex flex-col items-center">
+          <h1 className="heading text-center">
+            Share Your Vision, <br /> Collaborate with Innovators💡
+          </h1>
+          <p className="sub-heading text-center !max-w-3xl">
+            Share your ideas, cast your votes on pitches, and shine in our
+            virtual competitions!
+          </p>
+          <SearchForm query={query} />
+        </div>
       </section>
 
       <section className="section_container">

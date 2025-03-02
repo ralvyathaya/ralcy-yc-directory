@@ -5,12 +5,13 @@ import { formatDate } from "@/lib/utils"
 import React, { Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { marked } from "marked" // Replace markdown-it with marked
+import { marked } from "marked"
 import { Skeleton } from "@/components/ui/skeleton"
 import View from "@/components/View"
 import { PLAYLIST_BY_SLUG_QUERY } from "@/sanity/lib/queries"
 import { StartupTypeCard } from "@/components/StartupCard"
 import StartupCard from "@/components/StartupCard"
+import { FlickeringGrid } from "@/components/ui/flickering-grid"
 
 export const experimental_ppr = true
 
@@ -24,15 +25,26 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   if (!post) return notFound()
 
-  // Use marked to parse the markdown content and await the result
   const parsedContent = await marked(post?.pitch || "")
 
   return (
     <>
-      <section className="pink_container !min-h-[230px]">
-        <p className="tag">{formatDate(post?._createdAt)}</p>
-        <h1 className="heading">{post.title}</h1>
-        <p className="sub-heading !max-w-5xl">{post.description}</p>
+      <section className="hero_container !min-h-[230px] relative">
+        <FlickeringGrid
+          className="z-0 absolute inset-0 size-full"
+          squareSize={4}
+          gridGap={18}
+          color="#6B7280"
+          maxOpacity={0.5}
+          flickerChance={0.3}
+        />
+        <div className="relative z-10">
+          <p className="tag !max-w-[200px] text-center mx-auto">
+            {formatDate(post?._createdAt)}
+          </p>
+          <h1 className="heading !max-w-xl mx-auto">{post.title}</h1>
+          <p className="sub-heading !max-w-5xl">{post.description}</p>
+        </div>
       </section>
 
       <section className="section_container">
@@ -51,7 +63,6 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
               className="flex gap-2 items-center mb-3"
             >
               <Image
-                // Replaced urlFor usage since author.image is now a URL string
                 src={post.author.image || "https://placehold.co/64x64"}
                 alt={`${post.author.name}'s avatar`}
                 width={64}
@@ -83,7 +94,6 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         {editorPosts?.length > 0 && (
           <div className="max-w-4xl mx-auto">
             <p className="text-30-semibold">Editor Picks</p>
-
             <ul className="mt-7 card_grid-sm">
               {editorPosts.map((post: StartupTypeCard, i: number) => (
                 <StartupCard key={i} post={post} />

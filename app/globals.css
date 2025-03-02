@@ -59,8 +59,8 @@
         @apply font-normal text-sm text-white-100/80;
     }
 
-    .pink_container {
-        @apply w-full bg-white min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
+    .hero_container {
+        @apply w-full bg-transparent min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
         background-image: radial-gradient(circle at 50% 50%, rgba(205, 127, 50, 0.05) 0%, transparent 70%);
     }
 

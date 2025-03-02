@@ -1,6 +1,6 @@
-"use client";
-import { LogOut } from "lucide-react";
-import { signIn, signOut } from "next-auth/react";
+"use client"
+import { LogOut } from "lucide-react"
+import { signIn, signOut } from "next-auth/react"
 
 export function LoginButton() {
   return (
@@ -10,7 +10,7 @@ export function LoginButton() {
     >
       Login with GitHub
     </button>
-  );
+  )
 }
 
 export function LogoutButton() {
@@ -22,5 +22,5 @@ export function LogoutButton() {
       <LogOut className="mr-2" />
       Logout
     </button>
-  );
+  )
 }
