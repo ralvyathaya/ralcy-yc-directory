@@ -3,8 +3,9 @@ import { authOptions } from "@/auth"
 import SearchForm from "../../components/SearchForm"
 import StartupCard, { StartupTypeCard } from "../../components/StartupCard"
 import { STARTUPS_QUERY } from "@/sanity/lib/queries"
-import { sanityFetch, SanityLive } from "@/sanity/lib/live"
+import { SanityLive } from "@/sanity/lib/live"
 import { FlickeringGrid } from "@/components/ui/flickering-grid"
+import { client } from "@/sanity/lib/client"
 
 export default async function Home({
   searchParams,
@@ -17,7 +18,10 @@ export default async function Home({
   const session = await getServerSession(authOptions)
   console.log(session?.user?.id) // Access Sanity user ID
 
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params })
+  // Use non-cached client to ensure fresh data
+  const posts = await client
+    .withConfig({ useCdn: false })
+    .fetch(STARTUPS_QUERY, params)
 
   return (
     <>

@@ -4,7 +4,10 @@ import React from "react"
 import StartupCard, { StartupTypeCard } from "./StartupCard"
 
 const UserStartups = async ({ id }: { id: string }) => {
-  const startups = await client.fetch(STARTUPS_BY_AUTHOR_QUERY, { id })
+  // Always fetch fresh data with useCdn: false
+  const startups = await client
+    .withConfig({ useCdn: false })
+    .fetch(STARTUPS_BY_AUTHOR_QUERY, { id })
 
   // Render StartupCard components if startups exist
   return (
